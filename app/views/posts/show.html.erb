@@ -1,0 +1,30 @@
+<div class="article">
+	<p id="notice"><%= notice %></p>
+	<h1 id="postTitle" class="articleCenter"><%= @post.title %></h1>
+	</br></br>
+	<p class="article">
+	  <%= @post.content %>
+	</p>
+
+	<p class="articleCenter">
+	  <%= @post.likes %> Likes
+	</p>
+
+	<div class="articleCenter">
+		<% comments = Comment.where(post_id:@post.id) %>
+		<% comments.each do |comment| %>
+		      <tr>
+		        <td><%= comment.content %></td>
+		      </tr>
+		<% end %>
+	</div>
+	
+	<p class="articleCenter">
+		<%= link_to 'Edit', edit_post_path(@post) %> |
+		<%= link_to 'Back', posts_path %>
+	</p>
+</div>
+
+<script type="text/javascript">
+	document.getElementById("title").innerHTML = document.getElementById("postTitle").innerHTML
+</script>
