@@ -5,9 +5,9 @@
   <%= @comment.content %>
 </p>
 
-<p>
+<p class="articleCenter">
   <strong>Post:</strong>
-  <%= @comment.post %>
+  <%= @comment.post.title %>
 </p>
 
 <%= link_to 'Edit', edit_comment_path(@comment) %> |

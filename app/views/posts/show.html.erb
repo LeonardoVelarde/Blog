@@ -6,23 +6,41 @@
 	  <%= @post.content %>
 	</p>
 
-	<p class="articleCenter">
+	<p class="likeBox">
 	  <%= @post.likes %> Likes
+	  <form action="/posts/<%=@post.id%>" method="post">
+        <input type="submit" value="Like" name="Submit" class="coolbutton" style="float: right;"/>
+      </form>
 	</p>
 
-	<div class="articleCenter">
-		<% comments = Comment.where(post_id:@post.id) %>
-		<% comments.each do |comment| %>
+	<div class="commentBox">
+		<strong>Comments:</strong>
+		</br>
+		<% @comments.each do |comment| %>
 		      <tr>
 		        <td><%= comment.content %></td>
+		        <td><%= Date.parse(comment.created_at.to_s) %></td>
 		      </tr>
+		      <br>
 		<% end %>
+
+		<form accept-charset="UTF-8" action="/comments" class="new_comment" id="new_comment" method="post">
+
+		  <div class="field">
+		    <label for="comment_content"></label><br>
+		    <textarea id="comment_content" name="comment[content]"></textarea>
+		  </div>
+		  <div class="field">
+		    <label for="comment_post_id"></label><br>
+		    <input id="comment_post_id" name="comment[post_id]" type="hidden" value="<%=@post.id%>">
+		  </div>
+		  <div class="actions">
+		    <input class="coolbutton" name="commit" type="submit" value="Comment">
+		  </div>
+		</form>
+
 	</div>
 	
-	<p class="articleCenter">
-		<%= link_to 'Edit', edit_post_path(@post) %> |
-		<%= link_to 'Back', posts_path %>
-	</p>
 </div>
 
 <script type="text/javascript">

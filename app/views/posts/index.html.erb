@@ -1,29 +1,41 @@
-<h1>Listing posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Title</th>
-      <th>Likes</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<h1 class="pagetitle">Admin Page</h1>
+<p id="notice"><%= notice %></p>
+<p id="back"><%= link_to 'Home', welcome_index_path %> | <%= link_to 'New Post', new_post_path %></p>
+</br>
+</br>
+<div class="homecontent">
+    <% @posts = @posts.order('created_at DESC') %>
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.content %></td>
-        <td><%= post.title %></td>
-        <td><%= post.likes %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="article">
+        <h3 id="postTitle" class="articleCenter"><%= link_to post.title, edit_post_path(post) %></h3>
+        </br></br>
+        <p class="article">
+          <%= post.content %>
+        </p>
+
+        <p class="likeBox">
+          <%= post.likes %> Likes
+        </p>
+
+        <div class="commentBox">
+          <strong>Comments:</strong>
+          </br>
+          <% comments = Comment.where(post_id:post.id) %>
+          <% comments.each do |comment| %>
+                <ul>
+                  <li><%= comment.content %>&nbsp;-&nbsp;<%= Date.parse(comment.created_at.to_s) %></li>
+                </ul>
+          <% end %>
+        </div>
+        
+        <p class="articleCenter">
+          <%= button_tag(class: 'coolbutton', style: 'padding: 0px') do link_to 'Delete', post ,method: :delete, class: 'buttonlink',data: { confirm: 'Are you sure?' } end %>
+           <!-- #link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }  -->
+        </p>
+        </br>
+        </br>
+        </br>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
+</div>
 <br>
-
-<%= link_to 'New Post', new_post_path %>

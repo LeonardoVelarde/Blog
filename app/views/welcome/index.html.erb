@@ -1,0 +1,57 @@
+<h1 class="pagetitle">Main Page</h1>
+
+<div style="width: 20%;">
+<form action="/" method="get">
+  <div class="searchbox">
+    <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
+  </div>
+  <input type="submit" value="Search" name="Submit" class="coolbutton" />
+</form>
+</div>
+
+<p id="back"><%= link_to 'Admin Page', posts_path %></p>
+</br>
+</br>
+
+
+<div class="homecontent">
+    <% @posts = @posts.order('created_at DESC') %>
+    <% @posts.each do |post| %>
+      <div class="article">
+        <h3 id="postTitle" class="articleCenter"><%= link_to post.title, post_path(post) %></h3>
+        </br></br>
+        <p class="article">
+          <%= post.content %>
+        </p>
+        <br>
+
+        <p> Posted on: 
+          <%= Date.parse(post.created_at.to_s) %>
+        </p>
+
+        <p class="likeBox">
+          <%= post.likes %> Likes
+          <br>
+          <!-- aqui estaba el button tag -->
+          <form action="/posts/<%=post.id%>" method="post">
+            <input type="submit" value="Like" name="Submit" class="coolbutton" />
+          </form>
+        </p>
+
+        <div class="commentBox">
+          <strong>Comments:</strong>
+          </br>
+          <% comments = Comment.where(post_id:post.id) %>
+          <% comments.each do |comment| %>
+                <ul>
+                  <li><%= comment.content %>&nbsp;-&nbsp;<%= Date.parse(comment.created_at.to_s) %></li>
+                </ul>
+          <% end %>
+        </div>
+        
+        <p class="articleCenter">
+        </p>
+      </div>
+    <% end %>
+</div>
+<br>

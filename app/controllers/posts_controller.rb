@@ -7,9 +7,23 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  #GET /posts/report
+  def report
+    @posts = Post.all
+    @comments = Comment.all
+  end
+
+  # POST /post/1
+  def like
+    @post = Post.find(params[:id])
+    @post.update_attribute(:likes, (@post.likes+1))
+    redirect_to :back
+  end
+  
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @comments = Comment.where(post_id:@post.id)
   end
 
   # GET /posts/new

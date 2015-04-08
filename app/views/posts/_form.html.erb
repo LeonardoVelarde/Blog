@@ -1,3 +1,4 @@
+<div class="articleCenter">
 <%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
@@ -12,18 +13,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br>
+    <h2 class="newtitle"><%= f.label :title %><br></h2>
     <%= f.text_field :title %>
   </div>
-  <div class="field">
-    <%= f.label :likes %><br>
-    <%= f.number_field :likes %>
+
+  <div>
+    <p class="newcontent"><%= f.label :content %><br></p>
+    <%= f.text_area :content %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+    <%= button_tag(type: 'submit', class: "coolbutton") do content_tag(:strong, 'Submit') end %>
 <% end %>
+</div>
