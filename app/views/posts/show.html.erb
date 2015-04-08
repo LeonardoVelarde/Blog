@@ -6,6 +6,12 @@
 	  <%= @post.content %>
 	</p>
 
+	<p> Posted on: 
+      <%= Date.parse(@post.created_at.to_s) %>
+      <br>
+      <strong>Category: </strong><%= @post.category %>
+    </p>
+
 	<p class="likeBox">
 	  <%= @post.likes %> Likes
 	  <form action="/posts/<%=@post.id%>" method="post">
@@ -18,9 +24,10 @@
 		</br>
 		<% @comments.each do |comment| %>
 		      <tr>
-		        <td><%= comment.content %></td>
+		        <td><%= comment.content %> - </td>
 		        <td><%= Date.parse(comment.created_at.to_s) %></td>
 		      </tr>
+		      <br>
 		      <br>
 		<% end %>
 
@@ -42,6 +49,9 @@
 	</div>
 	
 </div>
+
+<br>
+<a href="http://localhost:3000">Home</a>
 
 <script type="text/javascript">
 	document.getElementById("title").innerHTML = document.getElementById("postTitle").innerHTML

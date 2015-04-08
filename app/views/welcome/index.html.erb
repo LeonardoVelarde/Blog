@@ -4,12 +4,18 @@
 <form action="/" method="get">
   <div class="searchbox">
     <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
+    <%= text_field_tag :category, params[:category], placeholder: "Search Article Category" %>
   </div>
   <input type="submit" value="Search" name="Submit" class="coolbutton" />
 </form>
 </div>
 
-<p id="back"><%= link_to 'Admin Page', posts_path %></p>
+<div>
+<p id="back"><%= link_to 'Admin Page', posts_path %> |
+  <a href="http://localhost:3000/postreport">Report</a>
+</p>
+</div>
+
 </br>
 </br>
 
@@ -27,6 +33,8 @@
 
         <p> Posted on: 
           <%= Date.parse(post.created_at.to_s) %>
+          <br>
+          <strong>Category: </strong><%= post.category %>
         </p>
 
         <p class="likeBox">
