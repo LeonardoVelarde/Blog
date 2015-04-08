@@ -26,6 +26,7 @@
       <div class="article">
         <h3 id="postTitle" class="articleCenter"><%= link_to post.title, post_path(post) %></h3>
         </br></br>
+        <strong>Posted by: </strong><%= post.user.name %>
         <p class="article">
           <%= post.content %>
         </p>

@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
 
 	def set_likes
 		self.likes = 0
+		self.user_id = 1
 	end
 
 	def self.search(search, category)
